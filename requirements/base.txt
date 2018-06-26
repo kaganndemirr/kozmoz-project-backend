@@ -1,0 +1,29 @@
+# Django
+Django==2.0.6
+
+# Django Rest Framework
+djangorestframework==3.8.2
+
+# Djoser
+djoser==1.1.5
+# django-templated-mail==1.1.1
+
+# Documentation
+mkdocs==0.17.4
+# Markdown==2.6.11
+# PyYAML==3.12
+# click==6.7
+# livereload==2.5.2
+# tornado==4.5.3
+# Jinja2==2.10
+# six==1.11.0
+
+# Celery
+celery==4.2.0
+# billard==3.5.0.3
+# kombu==4.2.1
+# amqp==2.3.2
+# vine==1.1.4
+
+# Pillow
+pillow==5.1.0
