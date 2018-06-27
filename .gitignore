@@ -10,3 +10,6 @@ env/
 *.pyc
 __pycache__/
 db.sqlite3
+
+# Static
+kozmoz/static/video/uploads/
