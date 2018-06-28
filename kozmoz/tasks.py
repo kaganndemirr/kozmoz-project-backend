@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from kozmoz import celery_app
 from posts.models import Post, Comment
 
-@celery_app
+@celery_app.task
 def mail_task(context, verb):
     """
     Context Format

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+
 # Standart Library
 import os
 import sys
@@ -24,6 +25,11 @@ sys.path.append(PACKAGE_ROOT + '/apps')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'j(ts!(q*5ztmfzu82_upls8-c$=^yv-(-7omun^62g3$&6ay^1'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -41,8 +47,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'easy_thumbnails'
 
     # Internal Applications
+    'users',
     'posts'
 
 ]
@@ -62,7 +70,7 @@ ROOT_URLCONF = 'kozmoz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PACKAGE_ROOT, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,6 +85,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kozmoz.wsgi.application'
 
+# User
+AUTH_USER_MODEL = 'users.User'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -89,3 +100,21 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PACKAGE_ROOT, 'static/')
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Easy Thumbnails
+
+THUMBNAIL_MEDIA_URL = "/media/thumbnail/"
+THUMBNAIL_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'thumbnail/')
+
+from .app_settings import *

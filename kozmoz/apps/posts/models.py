@@ -14,7 +14,7 @@ class Post(models.Model):
         )
     published_date = models.DateTimeField(verbose_name=_('Published Date'))
     media = ContentTypeRestrictedFileField(
-        upload_to='kozmoz/static/video/uploads/', content_types=['video/mp4'],
+        upload_to='media/video', content_types=['video/mp4'],
         max_upload_size=5242880, blank=False, null=False
         )
     user = models.ForeignKey(

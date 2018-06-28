@@ -25,5 +25,6 @@ celery==4.2.0
 # amqp==2.3.2
 # vine==1.1.4
 
-# Pillow
+# Image
+easy-thumbnails==2.5
 pillow==5.1.0
