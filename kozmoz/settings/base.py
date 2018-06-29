@@ -47,11 +47,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'easy_thumbnails'
+    'easy_thumbnails',
 
     # Internal Applications
-    'users',
-    'posts'
+    'posts',
+    'users'
+
 
 ]
 

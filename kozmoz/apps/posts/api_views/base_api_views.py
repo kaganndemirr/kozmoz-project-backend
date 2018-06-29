@@ -4,14 +4,15 @@ from rest_framework import viewsets, mixins
 # Local Django
 from posts.models import Post, Comment
 from posts.serializers import (PostSerializer, PostListSerializer,
-    PostRetrieveSerializer
+    PostRetrieveSerializer, CommentSerializer, CommentListSerializer,
+    CommentRetrieveSerializer
 )
 
 
-class PostViewSet(mixins.ListModelMixin
-                  mixins.RetrieveModelMixin
+class PostViewSet(mixins.ListModelMixin,
+                  mixins.RetrieveModelMixin,
                   viewsets.GenericViewSet
-                 )
+                 ):
     queryset = Post.objects.all()
 
     def get_queryset(self):
@@ -26,10 +27,10 @@ class PostViewSet(mixins.ListModelMixin
             return PostSerializer
 
 
-class CommentViewSet(mixins.ListModelMixin
-                     mixins.RetrieveModelMixin
+class CommentViewSet(mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet
-                     )
+                     ):
     queryset = Comment.objects.all()
 
     def queryset(self):

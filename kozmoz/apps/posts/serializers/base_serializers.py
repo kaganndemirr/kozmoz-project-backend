@@ -8,6 +8,20 @@ from django.utils.translation import ugettext_lazy as _
 from posts.models import Post, Comment
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'user', 'post', 'comment', 'comment_published_date')
+
+
+class CommentListSerializer(CommentSerializer):
+    pass
+
+
+class CommentRetrieveSerializer(CommentSerializer):
+    pass
+
+
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
 
@@ -30,17 +44,3 @@ class PostRetrieveSerializer(PostSerializer):
         fields = ('id', 'user', 'description', 'media',
             'published_date', 'comments'
         )
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ('id', 'user', 'post', 'comment', 'comment_published_date')
-
-
-class CommentListSerializer(serializers.ModelSerializer):
-    pass
-
-
-class CommentRetrieveSerializer(serializers.ModelSerializer):
-    pass

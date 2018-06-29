@@ -16,8 +16,10 @@ Including another URLconf
 
 # Django
 from django.contrib import admin
-from django.urls import path
+from django.conf import settings
+from django.urls import path, re_path
 from django.conf.urls import include
+from django.views.static import serve
 
 # Local Django
 from kozmoz.views import ActivationView, ResetPasswordView
@@ -33,6 +35,14 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
 
     # Activation and Password Operations
-    path('activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
-    path('reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password')
+    re_path('activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
+    re_path('reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password')
 ]
+
+# Media
+if settings.DEBUG:
+    urlpatterns += (
+        re_path('^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    )
