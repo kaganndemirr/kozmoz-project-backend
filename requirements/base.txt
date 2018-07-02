@@ -5,8 +5,10 @@ Django==2.0.6
 djangorestframework==3.8.2
 
 # Djoser
-djoser==1.1.5
-# django-templated-mail==1.1.1
+djoser==0.6.0
+
+#[[djoser==1.1.5
+# django-templated-mail==1.1.1]]
 
 # Documentation
 mkdocs==0.17.4

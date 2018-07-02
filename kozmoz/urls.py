@@ -22,9 +22,14 @@ from django.conf.urls import include
 from django.views.static import serve
 
 # Local Django
+from core.api_views import LoginView
 from kozmoz.views import ActivationView, ResetPasswordView
+from kozmoz.views import IndexView
 
 urlpatterns = [
+    # Landing
+    re_path('$', IndexView.as_view(), name='index'),
+
     # Admin
     path('admin/', admin.site.urls),
 
@@ -32,6 +37,7 @@ urlpatterns = [
     path('', include('kozmoz.api_urls')),
 
     # Token
+    path('auth/login', LoginView.as_view(), name='login'),
     path('auth/', include('djoser.urls.authtoken')),
 
     # Activation and Password Operations

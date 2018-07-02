@@ -13,6 +13,22 @@ from kozmoz.forms import ResetPasswordForm
 from kozmoz.variables import RESET_PASSWORD_FORM_PREFIX
 from kozmoz.modules import ActivationKeyModule, ResetPasswordKeyModule
 
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+
+        context.update({
+            'title': 'Kozmoz',
+            'domain_admin_panel': '/admin/',
+            'source_code_backend': settings.SOURCE_CODE_BACKEND,
+        })
+
+        return context
+
+
 class ActivationView(TemplateView):
     template_name = 'activation.html'
 

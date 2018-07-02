@@ -25,6 +25,10 @@ DATABASES = {
     }
 }
 
+# Source Code
+
+SOURCE_CODE_BACKEND = 'https://github.com/kaganndemirr/kozmoz-project-backend'
+
 
 # Domain
 

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
 
     # Internal Applications
+    'core',
     'posts',
     'users'
 
