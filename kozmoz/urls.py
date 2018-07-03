@@ -23,32 +23,23 @@ from django.views.static import serve
 
 # Local Django
 from core.api_views import LoginView
-from kozmoz.views import ActivationView, ResetPasswordView
-from kozmoz.views import IndexView
+from kozmoz.views import IndexView, ActivationView, ResetPasswordView
 
 urlpatterns = [
     # Landing
-    re_path('$', IndexView.as_view(), name='index'),
+    re_path('^$', IndexView.as_view(), name='index'),
 
     # Admin
-    path('admin/', admin.site.urls),
-
-    # Api
-    path('', include('kozmoz.api_urls')),
+    re_path('^admin/', admin.site.urls),
 
     # Token
-    path('auth/login', LoginView.as_view(), name='login'),
-    path('auth/', include('djoser.urls.authtoken')),
+    re_path('^auth/login', LoginView.as_view(), name='login'),
+    re_path('^auth/', include('djoser.urls.authtoken')),
+
+    # Api
+    re_path('^', include('kozmoz.api_urls')),
 
     # Activation and Password Operations
-    re_path('activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
-    re_path('reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password')
+    re_path('^activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
+    re_path('^reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password')
 ]
-
-# Media
-if settings.DEBUG:
-    urlpatterns += (
-        re_path('^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT,
-        }),
-    )

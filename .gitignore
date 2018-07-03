@@ -12,3 +12,6 @@ __pycache__/
 db.sqlite3
 local.py
 secrets.py
+
+### Celery ###
+kozmoz_vorker.state

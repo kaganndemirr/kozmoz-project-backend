@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load i18n staticfiles %}
+
+{% block title%}Index | {{block.super }}{% endblock %}
+
+{% block style %}
+  {{ block.super }}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div>
+    <div id="link-area">
+      <div>
+        {% if domain_admin_panel %}
+          <a href="{{ domain_admin_panel }}">
+            <button class="login-button">{% trans "Admin Panel" %}</button>
+          </a>
+        {% endif %}
+      </div>
+      <div>
+        {% if source_code_backend %}
+          <a href="{{ source_code_backend }}" target="_blank">
+            <button class="login-button">{% trans "Backend Source Code" %}</button>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer" id="footer">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td valign="top" align="center">
+            <span>
+              {% blocktrans trimmed %}Kozmoz{% endblocktrans %}
+            </span>
+            <br> <span>2018 ©</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+{% endblock %}

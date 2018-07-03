@@ -19,5 +19,5 @@ for router in LIST_V1:
     router_V1.register(router[0], router[1], base_name=router[2])
 
 urlpatterns = [
-    path(r'v1/', include((router_V1.urls, 'v1'), namespace='v1')),
+    path('v1/', include((router_V1.urls, 'v1'), namespace='v1')),
 ]
