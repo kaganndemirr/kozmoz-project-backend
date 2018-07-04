@@ -14,4 +14,4 @@ local.py
 secrets.py
 
 ### Celery ###
-kozmoz_vorker.state
+kozmoz_worker.state
