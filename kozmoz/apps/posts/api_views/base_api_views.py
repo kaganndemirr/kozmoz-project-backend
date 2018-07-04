@@ -62,6 +62,10 @@ class CommentViewSet(mixins.ListModelMixin,
             return CommentListSerializer
         elif self.action == 'retrieve':
             return CommentRetrieveSerializer
+        elif self.action == 'create':
+            return CommentCreateSerializer
+        elif self.action == 'update':
+            return CommentUpdateSerializer
         else:
             return CommentSerializer
 
