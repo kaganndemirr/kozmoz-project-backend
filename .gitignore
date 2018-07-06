@@ -11,7 +11,8 @@ env/
 __pycache__/
 db.sqlite3
 local.py
-secrets.py
+local_secrets.py
+staging_production_secrets.py
 
 ### Celery ###
 kozmoz_worker.state

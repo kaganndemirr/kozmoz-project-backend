@@ -50,7 +50,6 @@ class ActivationView(TemplateView):
 
         context.update({
             'title': 'Activation',
-            'domain_frontend': settings.DOMAIN_FRONTEND,
             'activation_key': self.activation_key,
             'activation_message': self.activation_message
         })
@@ -95,7 +94,6 @@ class ResetPasswordView(TemplateView):
 
         context.update({
             'title': _('Reset Password'),
-            'domain_frontend': settings.DOMAIN_FRONTEND,
             'reset_password_key': self.reset_password_key,
             'reset_password_error': self.reset_password_error,
             'reset_password_success': self.reset_password_success,
