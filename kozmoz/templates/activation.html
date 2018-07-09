@@ -1,0 +1,30 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n admin_static staticfiles %}
+
+
+{% block extrastyle %}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block usertools %}{% endblock %}
+
+{% block branding %}{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+  {% if activation_key %}
+    <p class="errornote" style="color:#33CC00; border: 1px solid #33CC00; text-align: center;">
+      {{ activation_message }}
+    </p>
+  {% else %}
+    <p class="errornote" style="text-align: center;">
+      {{ activation_message }}
+    </p>
+  {% endif %}
+{% endblock %}

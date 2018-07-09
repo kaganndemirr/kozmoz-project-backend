@@ -5,7 +5,7 @@ from .local_secrets import(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
     )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']

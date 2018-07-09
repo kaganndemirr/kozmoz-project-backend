@@ -35,7 +35,7 @@ class ActivationView(TemplateView):
     def dispatch(self, request, key, *args, **kwargs):
         self.activation(key)
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             if self.activation_key:
                 messages.success(request, self.activation_message)
             else:

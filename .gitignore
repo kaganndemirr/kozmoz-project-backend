@@ -10,9 +10,12 @@ env/
 *.pyc
 __pycache__/
 db.sqlite3
-local.py
 local_secrets.py
 staging_production_secrets.py
 
 ### Celery ###
 kozmoz_worker.state
+kozmoz_worker.state.db
+
+### Media ###
+media/
