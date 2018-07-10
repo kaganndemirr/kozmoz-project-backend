@@ -12,7 +12,8 @@ class Post(models.Model):
     description = models.TextField(
         verbose_name='Description', max_length=1000, blank=True
         )
-    published_date = models.DateTimeField(verbose_name=_('Date'))
+    published_date = models.DateTimeField(verbose_name=_('Date'),
+    auto_now_add = True, editable = False)
     media = ContentTypeRestrictedFileField(
         upload_to='video', content_types=['video/mp4'],
         max_upload_size=5242880, blank=False, null=False

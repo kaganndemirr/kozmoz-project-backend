@@ -73,7 +73,7 @@ class ActivationKey(models.Model):
     user = models.ForeignKey(
         verbose_name=_('User'),
         to=settings.AUTH_USER_MODEL, related_name='activation_keys',
-        on_delete=models.CASCADE
+        on_delete = models.CASCADE
     )
 
     class Meta:
@@ -90,7 +90,7 @@ class ResetPasswordKey(models.Model):
     user = models.ForeignKey(
         verbose_name=_('User'),
         to=settings.AUTH_USER_MODEL, related_name='reset_password_keys',
-        on_delete=models.CASCADE
+        on_delete = models.CASCADE
     )
 
     class Meta:

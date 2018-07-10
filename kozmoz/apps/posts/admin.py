@@ -7,7 +7,7 @@ from posts.models import Post, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    fields = ('user', 'description', 'media', 'published_date')
+    fields = ('user', 'description', 'media',)
 
     list_display = ('user', 'description', 'media', 'published_date')
     search_fields = ('user__email', 'user__first_name', 'user__last_name')
