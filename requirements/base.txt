@@ -1,6 +1,10 @@
 # Django
 Django==2.0.6
 
+# Image
+easy-thumbnails==2.5
+pillow==5.1.0
+
 # Django Rest Framework
 djangorestframework==3.8.2
 
@@ -9,6 +13,17 @@ djoser==0.6.0
 
 #[[djoser==1.1.5
 # django-templated-mail==1.1.1]]
+
+# Celery
+celery==4.2.0
+# billard==3.5.0.3
+# kombu==4.2.1
+# amqp==2.3.2
+# vine==1.1.4
+
+# For Celery For Windows
+eventlet==0.23.0
+# greenlet==0.4.13
 
 # Documentation
 mkdocs==0.17.4
@@ -19,14 +34,3 @@ mkdocs==0.17.4
 # tornado==4.5.3
 # Jinja2==2.10
 # six==1.11.0
-
-# Celery
-celery==4.2.0
-# billard==3.5.0.3
-# kombu==4.2.1
-# amqp==2.3.2
-# vine==1.1.4
-
-# Image
-easy-thumbnails==2.5
-pillow==5.1.0

@@ -13,7 +13,8 @@ class Post(models.Model):
         verbose_name='Description', max_length=1000, blank=True
         )
     published_date = models.DateTimeField(verbose_name=_('Date'),
-    auto_now_add = True, editable = False)
+    auto_now_add = True, editable = False
+        )
     media = ContentTypeRestrictedFileField(
         upload_to='video', content_types=['video/mp4'],
         max_upload_size=5242880, blank=False, null=False
@@ -33,16 +34,14 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(
-        verbose_name=_('User'), to='users.User', related_name='comments',
-        on_delete=models.CASCADE
-    )
     post = models.ForeignKey(
         verbose_name=_('Post'), to='posts.Post', related_name='comments',
         on_delete=models.CASCADE
     )
     comment = models.TextField(verbose_name='Comment', max_length=1000, blank=True)
-    comment_published_date=models.DateTimeField(verbose_name=_('Date'))
+    comment_published_date=models.DateTimeField(verbose_name=_('Date'),
+        auto_now_add = True, editable = False
+    )
 
     class Meta:
         verbose_name=_('Comment')
@@ -50,4 +49,4 @@ class Comment(models.Model):
         ordering=('comment_published_date',)
 
     def __str__(self):
-        return '{comment}', format(comment=self.comment)
+        return '{post}'.format(post=self.post.description)

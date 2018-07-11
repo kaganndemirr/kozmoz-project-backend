@@ -23,7 +23,9 @@ from django.views.static import serve
 
 # Local Django
 from core.api_views import LoginView
-from kozmoz.views import IndexView, ActivationView, ResetPasswordView
+from kozmoz.views import(IndexView, ActivationView,
+    ResetPasswordView, DocumentationView
+    )
 
 urlpatterns = [
     # Landing
@@ -41,5 +43,9 @@ urlpatterns = [
 
     # Activation and Password Operations
     re_path('^activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
-    re_path('^reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password')
+    re_path('^reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password'),
+
+    # Documentation
+    re_path('^docs/$', DocumentationView.as_view(), name='docs'),
+    re_path('^docs/(?P<path>.*)$', DocumentationView.as_view(), name='docs'),
 ]

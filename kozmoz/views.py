@@ -23,6 +23,7 @@ class IndexView(TemplateView):
         context.update({
             'title': 'Kozmoz',
             'domain_admin_panel': '/admin/',
+            'domain_documentation': '/docs/',
             'source_code_backend': settings.SOURCE_CODE_BACKEND,
         })
 
@@ -138,3 +139,11 @@ class ResetPasswordView(TemplateView):
 
         if not self.reset_password_key:
             self.reset_password_message = _('Incorrect or used key!')
+
+
+class DocumentationView(View):
+
+    def get(self, request, path='index.html', **kwargs):
+        return serve(
+            request, path, document_root=settings.DOCUMENTATION_ROOT, **kwargs
+        )

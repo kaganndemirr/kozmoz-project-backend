@@ -19,3 +19,6 @@ kozmoz_worker.state.db
 
 ### Media ###
 media/
+
+# mkdocs documentation
+docs_build/

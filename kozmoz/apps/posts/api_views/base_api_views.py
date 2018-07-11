@@ -10,6 +10,39 @@ from posts.serializers import (PostSerializer, PostListSerializer,
 )
 
 
+class CommentViewSet(mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.DestroyModelMixin,
+                     viewsets.GenericViewSet
+                    ):
+    queryset = Comment.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return CommentListSerializer
+        elif self.action == 'retrieve':
+            return CommentRetrieveSerializer
+        elif self.action == 'create':
+            return CommentCreateSerializer
+        elif self.action == 'update':
+            return CommentUpdateSerializer
+        else:
+            return CommentSerializer
+
+    def perform_create(self, serializer):
+        comment = serializer.save()
+        comment.save()
+
+    def perform_update(self, serializer):
+        comment = serializer.save()
+        comment.save()
+
+    def perform_destroy(self, instance):
+        super(CommentViewSet, self).perform_destroy(instance)
+
+
 class PostViewSet(mixins.ListModelMixin,
                   mixins.RetrieveModelMixin,
                   mixins.CreateModelMixin,
@@ -43,39 +76,3 @@ class PostViewSet(mixins.ListModelMixin,
 
     def perform_destroy(self, instance):
         super(PostViewSet, self).perform_destroy(instance)
-
-
-class CommentViewSet(mixins.ListModelMixin,
-                     mixins.RetrieveModelMixin,
-                     mixins.CreateModelMixin,
-                     mixins.UpdateModelMixin,
-                     mixins.DestroyModelMixin,
-                     viewsets.GenericViewSet
-                    ):
-    queryset = Comment.objects.all()
-
-    def queryset(self):
-        return self.queryset.filter(post__user=self.request.user)
-
-    def get_serializer_class(self):
-        if self.action == 'list':
-            return CommentListSerializer
-        elif self.action == 'retrieve':
-            return CommentRetrieveSerializer
-        elif self.action == 'create':
-            return CommentCreateSerializer
-        elif self.action == 'update':
-            return CommentUpdateSerializer
-        else:
-            return CommentSerializer
-
-    def perform_create(self, serializer):
-        comment = serializer.save()
-        comment.save()
-
-    def perform_update(self, serializer):
-        comment = serializer.save()
-        comment.save()
-
-    def perform_destroy(self, instance):
-        super(CommentViewSet, self).perform_destroy(instance)

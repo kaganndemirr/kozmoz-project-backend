@@ -20,6 +20,11 @@
           </a>
         {% endif %}
       </div>
+      {% if domain_documentation %}
+        <a href="{{ domain_documentation }}">
+          <button class="login-button">{% trans "Documentation" %}</button>
+        </a>
+      {% endif %}
       <div>
         {% if source_code_backend %}
           <a href="{{ source_code_backend }}" target="_blank">

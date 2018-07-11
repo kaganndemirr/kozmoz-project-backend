@@ -12,7 +12,8 @@ router_V1 = routers.DefaultRouter()
 
 LIST_V1 = [
     (r'posts', PostViewSetV1, 'posts'),
-    (r'users', UserViewSetV1, 'users')
+    (r'users', UserViewSetV1, 'users'),
+    (r'comments', CommentViewSetV1, 'comments')
 ]
 
 for router in LIST_V1:

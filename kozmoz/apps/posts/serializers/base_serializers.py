@@ -12,7 +12,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'user', 'post', 'comment', 'comment_published_date')
+        fields = ('id', 'post', 'comment', 'comment_published_date')
 
     def validate_task(self, value):
         user = self.context['request'].user
