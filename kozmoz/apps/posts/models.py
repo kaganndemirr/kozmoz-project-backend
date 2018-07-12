@@ -16,7 +16,7 @@ class Post(models.Model):
     auto_now_add = True, editable = False
         )
     media = ContentTypeRestrictedFileField(
-        upload_to='video', content_types=['video/mp4'],
+        upload_to='media', content_types=['video/mp4', 'image/gif'],
         max_upload_size=5242880, blank=False, null=False
         )
     user = models.ForeignKey(

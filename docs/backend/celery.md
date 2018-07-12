@@ -34,12 +34,12 @@ celery -A kozmoz worker -l info -n kozmoz_celery@%h --statedb=./kozmoz_worker.st
 
 **If you use Windows**:
 ```bash
-celery -A kozmoz worker -n kozmoz_celery@%h --statedb=./kozmoz_worker.state -P eventlet
+celery -A kozmoz worker -n kozmoz_celery@%h --statedb=./kozmoz_worker.state -P gevent
 ```
 
 **If you want to see your tasks list or output status on Windows**:
 ```bash
-celery -A kozmoz worker -l info -n kozmoz_celery@%h --statedb=./kozmoz_worker.state -P eventlet
+celery -A kozmoz worker -l info -n kozmoz_celery@%h --statedb=./kozmoz_worker.state -P gevent
 ```
 
 For further information of installation and running Celery: [First Steps With Celery](http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html)

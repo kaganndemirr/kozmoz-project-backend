@@ -16,6 +16,9 @@ staging_production_secrets.py
 ### Celery ###
 kozmoz_worker.state
 kozmoz_worker.state.db
+kozmoz_worker.state.dat
+kozmoz_worker.state.dir
+kozmoz_worker.state.bak
 
 ### Media ###
 media/
