@@ -2,17 +2,20 @@
 
 
 ## Installation of RabbitMQ
+
+**For Fedora**
 ```bash
-# For Fedora and Debian
 su root
-# For Ubuntu and Linux Mint
-sudo su
-
-apt-get update
-apt-get install rabbitmq-server
+dnf update
+dnf install rabbitmq-server
+/sbin/service rabbitmq-server start
 ```
-If you use another os: [RabbitMQ Installation for Other Distribution](https://www.rabbitmq.com/download.html)<br>
-
+**For Debian and Derivatives**
+```bash
+sudo su
+apt update
+apt install rabbitmq-server
+```
 
 ## Setting up RabbitMQ
 ```bash
@@ -30,16 +33,6 @@ celery -A kozmoz worker -n kozmoz_celery@%h --statedb=./kozmoz_worker.state
 **If you want to see your tasks list or output status**:
 ```bash
 celery -A kozmoz worker -l info -n kozmoz_celery@%h --statedb=./kozmoz_worker.state
-```
-
-**If you use Windows**:
-```bash
-celery -A kozmoz worker -n kozmoz_celery@%h --statedb=./kozmoz_worker.state -P gevent
-```
-
-**If you want to see your tasks list or output status on Windows**:
-```bash
-celery -A kozmoz worker -l info -n kozmoz_celery@%h --statedb=./kozmoz_worker.state -P gevent
 ```
 
 For further information of installation and running Celery: [First Steps With Celery](http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html)
