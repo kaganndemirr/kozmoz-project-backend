@@ -5,7 +5,21 @@ from rest_framework import serializers
 from django.utils.translation import ugettext_lazy as _
 
 # Local Django
-from posts.models import Post, Comment
+from posts.models import Post, Comment, PostVote, CommentVote
+
+
+class PostVoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PostVote
+        fields = ('id', 'post', 'vote_type')
+
+
+class PostVoteListSerializer(PostVoteSerializer):
+
+    class Meta:
+        model = PostVote
+        fields = ('id', 'post', 'vote_type')
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -47,11 +61,12 @@ class CommentUpdateSerializer(CommentSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
+    votes = PostVoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
         fields = ('id', 'user', 'description', 'media',
-            'published_date', 'comments'
+            'votes', 'published_date', 'comments'
         )
 
 
@@ -59,7 +74,7 @@ class PostListSerializer(PostSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'user', 'description', 'media')
+        fields = ('id', 'user', 'description', 'media', 'votes')
 
 
 class PostRetrieveSerializer(PostSerializer):
@@ -67,7 +82,7 @@ class PostRetrieveSerializer(PostSerializer):
     class Meta:
         model = Post
         fields = ('id', 'user', 'description', 'media',
-            'published_date', 'comments'
+             'votes', 'published_date', 'comments'
         )
 
 

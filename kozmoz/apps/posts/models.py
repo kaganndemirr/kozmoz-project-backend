@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 # Local
 from .formatChecker import ContentTypeRestrictedFileField
+from .variables import VOTE_SITUATIONS
+
 
 class Post(models.Model):
     description = models.TextField(
@@ -39,7 +41,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
     comment = models.TextField(verbose_name='Comment', max_length=1000, blank=True)
-    comment_published_date=models.DateTimeField(verbose_name=_('Date'),
+    comment_published_date=models.DateTimeField(verbose_name=_('Comment Published Date'),
         auto_now_add = True, editable = False
     )
 
@@ -50,3 +52,39 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{post}'.format(post=self.post.description)
+
+
+class PostVote(models.Model):
+    post = models.ForeignKey(
+        verbose_name=_('Post'), to='posts.Post', related_name='post_votes',
+        on_delete=models.CASCADE
+    )
+    vote_type = models.PositiveSmallIntegerField(choices=VOTE_SITUATIONS)
+    voting_date=models.DateTimeField(verbose_name=_('Voting Date'),
+        auto_now_add = True, editable = False
+    )
+
+    class Meta:
+        verbose_name = 'Posts Vote'
+        verbose_name_plural = 'Posts Votes'
+
+    def __str__(self):
+        return '{post}'.format(post=self.post.description)
+
+
+class CommentVote(models.Model):
+    comment = models.ForeignKey(
+        verbose_name=_('Comment'), to='posts.Comment', related_name='comment_votes',
+        on_delete=models.CASCADE
+    )
+    vote_type = models.PositiveSmallIntegerField(choices=VOTE_SITUATIONS)
+    voting_date=models.DateTimeField(verbose_name=_('Voting Date'),
+        auto_now_add = True, editable = False
+    )
+
+    class Meta:
+        verbose_name = 'Comments Vote'
+        verbose_name_plural = 'Comments Votes'
+
+    def __str__(self):
+        return '{comment}'.format(comment=self.comment.comment)

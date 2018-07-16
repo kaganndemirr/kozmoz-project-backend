@@ -2,11 +2,12 @@
 from rest_framework import viewsets, mixins
 
 # Local Django
-from posts.models import Post, Comment
+from posts.models import Post, Comment, PostVote, CommentVote
 from posts.serializers import (PostSerializer, PostListSerializer,
     PostRetrieveSerializer, PostCreateSerializer, PostUpdateSerializer,
-    CommentSerializer, CommentListSerializer, CommentRetrieveSerializer,
-    CommentCreateSerializer, CommentUpdateSerializer
+    PostVoteSerializer, PostVoteListSerializer, CommentSerializer,
+    CommentListSerializer, CommentRetrieveSerializer, CommentCreateSerializer,
+    CommentUpdateSerializer
 )
 
 
@@ -76,3 +77,19 @@ class PostViewSet(mixins.ListModelMixin,
 
     def perform_destroy(self, instance):
         super(PostViewSet, self).perform_destroy(instance)
+
+
+class PostVoteViewSet(mixins.ListModelMixin,
+                      mixins.RetrieveModelMixin,
+                      mixins.CreateModelMixin,
+                      mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin,
+                      viewsets.GenericViewSet
+                    ):
+    queryset = PostVote.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return PostVoteListSerializer
+        else:
+            return PostVoteSerializer
