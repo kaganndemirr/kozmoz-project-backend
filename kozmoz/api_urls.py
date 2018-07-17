@@ -6,7 +6,7 @@ from rest_framework import routers
 
 # Local Django
 from users.api_views import UserViewSetV1
-from posts.api_views import PostViewSetV1, CommentViewSetV1, PostVoteViewSetV1
+from posts.api_views import PostViewSetV1, CommentViewSetV1, PostVoteViewSetV1, CommentVoteViewSetV1
 
 router_V1 = routers.DefaultRouter()
 
@@ -14,7 +14,8 @@ LIST_V1 = [
     (r'posts', PostViewSetV1, 'posts'),
     (r'users', UserViewSetV1, 'users'),
     (r'comments', CommentViewSetV1, 'comments'),
-    (r'votes', PostVoteViewSetV1, 'votes')
+    (r'post_votes', PostVoteViewSetV1, 'post_votes'),
+    (r'comment_votes', CommentVoteViewSetV1, 'comment_votes')
 ]
 
 for router in LIST_V1:

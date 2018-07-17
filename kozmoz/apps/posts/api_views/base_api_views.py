@@ -7,7 +7,7 @@ from posts.serializers import (PostSerializer, PostListSerializer,
     PostRetrieveSerializer, PostCreateSerializer, PostUpdateSerializer,
     PostVoteSerializer, PostVoteListSerializer, CommentSerializer,
     CommentListSerializer, CommentRetrieveSerializer, CommentCreateSerializer,
-    CommentUpdateSerializer
+    CommentUpdateSerializer, CommentVoteSerializer, CommentVoteListSerializer
 )
 
 
@@ -93,3 +93,19 @@ class PostVoteViewSet(mixins.ListModelMixin,
             return PostVoteListSerializer
         else:
             return PostVoteSerializer
+
+
+class CommentVoteViewSet(mixins.ListModelMixin,
+                         mixins.RetrieveModelMixin,
+                         mixins.CreateModelMixin,
+                         mixins.UpdateModelMixin,
+                         mixins.DestroyModelMixin,
+                         viewsets.GenericViewSet
+                      ):
+    queryset = CommentVote.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+          return CommentVoteListSerializer
+        else:
+          return CommentVoteSerializer

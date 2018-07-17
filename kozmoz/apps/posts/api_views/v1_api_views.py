@@ -1,9 +1,10 @@
 # Local Django
-from .base_api_views import PostViewSet, CommentViewSet, PostVoteViewSet
+from .base_api_views import PostViewSet, CommentViewSet, PostVoteViewSet, CommentVoteViewSet
 from posts.serializers import (
-    PostSerializer, CommentSerializer, PostVoteSerializer, PostListSerializerV1, PostRetrieveSerializerV1,
-    PostCreateSerializerV1, PostUpdateSerializerV1, PostVoteListSerializerV1, CommentListSerializerV1,
-    CommentRetrieveSerializerV1, CommentCreateSerializerV1, CommentUpdateSerializerV1
+    PostSerializer, CommentSerializer, PostVoteSerializer, CommentVoteSerializer, PostListSerializerV1,
+    PostRetrieveSerializerV1, PostCreateSerializerV1, PostUpdateSerializerV1, PostVoteListSerializerV1,
+    CommentListSerializerV1, CommentRetrieveSerializerV1, CommentCreateSerializerV1,
+    CommentUpdateSerializerV1, CommentVoteSerializerV1, CommentVoteListSerializerV1
 )
 
 class PostViewSetV1(PostViewSet):
@@ -40,3 +41,11 @@ class PostVoteViewSetV1(PostVoteViewSet):
             return PostVoteListSerializerV1
         else:
             return PostVoteSerializer
+
+
+class CommentVoteViewSetV1(CommentVoteViewSet):
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return CommentVoteListSerializerV1
+        else:
+            return CommentVoteSerializer

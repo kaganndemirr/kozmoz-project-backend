@@ -22,11 +22,26 @@ class PostVoteListSerializer(PostVoteSerializer):
         fields = ('id', 'post', 'vote_type')
 
 
+class CommentVoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CommentVote
+        fields = ('id', 'comment', 'vote_type')
+
+
+class CommentVoteListSerializer(CommentVoteSerializer):
+
+    class Meta:
+        model = CommentVote
+        fields = ('id', 'comment', 'vote_type')
+
+
 class CommentSerializer(serializers.ModelSerializer):
+    comment_votes = CommentVoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Comment
-        fields = ('id', 'post', 'comment', 'comment_published_date')
+        fields = ('id', 'post', 'comment', 'comment_published_date', 'comment_votes')
 
     def validate_task(self, value):
         user = self.context['request'].user
@@ -61,12 +76,13 @@ class CommentUpdateSerializer(CommentSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
-    votes = PostVoteSerializer(many=True, read_only=True)
+    post_votes = PostVoteSerializer(many=True, read_only=True)
+    comment_votes = CommentVoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
         fields = ('id', 'user', 'description', 'media',
-            'votes', 'published_date', 'comments'
+            'post_votes', 'published_date', 'comments'
         )
 
 
@@ -74,7 +90,7 @@ class PostListSerializer(PostSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'user', 'description', 'media', 'votes')
+        fields = ('id', 'user', 'description', 'media', 'post_votes')
 
 
 class PostRetrieveSerializer(PostSerializer):
@@ -82,7 +98,7 @@ class PostRetrieveSerializer(PostSerializer):
     class Meta:
         model = Post
         fields = ('id', 'user', 'description', 'media',
-             'votes', 'published_date', 'comments'
+             'post_votes', 'published_date', 'comments'
         )
 
 
