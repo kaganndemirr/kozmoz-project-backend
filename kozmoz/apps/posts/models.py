@@ -44,6 +44,10 @@ class Comment(models.Model):
     comment_published_date=models.DateTimeField(verbose_name=_('Comment Published Date'),
         auto_now_add = True, editable = False
     )
+    user = models.ForeignKey(
+        verbose_name=_('User'), to='users.User', related_name='comments',
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         verbose_name=_('Comment')
@@ -63,6 +67,10 @@ class PostVote(models.Model):
     voting_date=models.DateTimeField(verbose_name=_('Voting Date'),
         auto_now_add = True, editable = False
     )
+    user = models.ForeignKey(
+        verbose_name=_('User'), to='users.User', related_name='post_votes',
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         verbose_name = 'Posts Vote'
@@ -80,6 +88,10 @@ class CommentVote(models.Model):
     vote_type = models.PositiveSmallIntegerField(choices=VOTE_SITUATIONS)
     voting_date=models.DateTimeField(verbose_name=_('Voting Date'),
         auto_now_add = True, editable = False
+    )
+    user = models.ForeignKey(
+        verbose_name=_('User'), to='users.User', related_name='comment_votes',
+        on_delete=models.CASCADE
     )
 
     class Meta:

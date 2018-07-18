@@ -22,6 +22,20 @@ class PostVoteListSerializer(PostVoteSerializer):
         fields = ('id', 'post', 'vote_type')
 
 
+class PostVoteCreateSerializer(PostVoteSerializer):
+
+    class Meta:
+        model = PostVote
+        fields = ('id', 'post', 'vote_type')
+
+
+class PostVoteUpdateSerializer(PostVoteSerializer):
+
+    class Meta:
+        model = PostVote
+        fields = ('id', 'vote_type')
+
+
 class CommentVoteSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -34,6 +48,20 @@ class CommentVoteListSerializer(CommentVoteSerializer):
     class Meta:
         model = CommentVote
         fields = ('id', 'comment', 'vote_type')
+        
+
+class CommentVoteCreateSerializer(CommentVoteSerializer):
+
+    class Meta:
+        model = CommentVote
+        fields = ('id', 'comment', 'vote_type')
+
+
+class CommentVoteUpdateSerializer(CommentVoteSerializer):
+
+    class Meta:
+        model = CommentVote
+        fields = ('id', 'vote_type')
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -41,23 +69,21 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'post', 'comment', 'comment_published_date', 'comment_votes')
-
-    def validate_task(self, value):
-        user = self.context['request'].user
-
-        if user != value.user:
-            raise serializers.ValidationError(_('Post does not found'))
-
-        return value
+        fields = ('id', 'user', 'post', 'comment', 'comment_published_date', 'comment_votes')
 
 
 class CommentListSerializer(CommentSerializer):
-    pass
+    
+    class Meta:
+        model = Comment
+        fields = ('id', 'user', 'post', 'comment', 'comment_published_date')
 
 
 class CommentRetrieveSerializer(CommentSerializer):
-    pass
+    
+    class Meta:
+        model = Comment
+        fields = ('id', 'user', 'post', 'comment', 'comment_published_date', 'comment_votes')
 
 
 class CommentCreateSerializer(CommentSerializer):
@@ -77,7 +103,6 @@ class CommentUpdateSerializer(CommentSerializer):
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     post_votes = PostVoteSerializer(many=True, read_only=True)
-    comment_votes = CommentVoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post

@@ -1,9 +1,10 @@
 # Local Django
-from .base_serializers import (PostSerializer, PostListSerializer,
-    PostRetrieveSerializer, PostCreateSerializer, PostUpdateSerializer,
-    PostVoteSerializer, PostVoteListSerializer, CommentSerializer, CommentListSerializer,
-    CommentRetrieveSerializer, CommentCreateSerializer, CommentUpdateSerializer, CommentVoteSerializer,
-    CommentVoteListSerializer
+from .base_serializers import (
+    PostSerializer, PostListSerializer, PostRetrieveSerializer, PostCreateSerializer,
+    PostUpdateSerializer, PostVoteSerializer, PostVoteListSerializer, PostVoteCreateSerializer,
+    PostVoteUpdateSerializer, CommentSerializer, CommentListSerializer, CommentRetrieveSerializer,
+    CommentCreateSerializer, CommentUpdateSerializer, CommentVoteSerializer, CommentVoteListSerializer,
+    CommentVoteCreateSerializer, CommentVoteUpdateSerializer
 )
 
 
@@ -15,11 +16,27 @@ class PostVoteListSerializerV1(PostVoteListSerializer):
     pass
 
 
+class PostVoteCreateSerializerV1(PostVoteCreateSerializer):
+    pass
+
+
+class PostVoteUpdateSerializerV1(PostVoteUpdateSerializer):
+    pass
+
+
 class CommentVoteSerializerV1(CommentVoteSerializer):
     pass
 
 
 class CommentVoteListSerializerV1(CommentVoteListSerializer):
+    pass
+
+
+class CommentVoteCreateSerializerV1(CommentVoteCreateSerializer):
+    pass
+
+
+class CommentVoteUpdateSerializerV1(CommentVoteUpdateSerializer):
     pass
 
 

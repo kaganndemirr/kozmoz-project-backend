@@ -3,11 +3,12 @@ from rest_framework import viewsets, mixins
 
 # Local Django
 from posts.models import Post, Comment, PostVote, CommentVote
-from posts.serializers import (PostSerializer, PostListSerializer,
-    PostRetrieveSerializer, PostCreateSerializer, PostUpdateSerializer,
-    PostVoteSerializer, PostVoteListSerializer, CommentSerializer,
-    CommentListSerializer, CommentRetrieveSerializer, CommentCreateSerializer,
-    CommentUpdateSerializer, CommentVoteSerializer, CommentVoteListSerializer
+from posts.serializers import (
+    PostSerializer, PostListSerializer, PostRetrieveSerializer, PostCreateSerializer,
+    PostUpdateSerializer, PostVoteSerializer, PostVoteListSerializer, PostVoteCreateSerializer,
+    PostVoteUpdateSerializer, CommentSerializer, CommentListSerializer, CommentRetrieveSerializer,
+    CommentCreateSerializer, CommentUpdateSerializer, CommentVoteSerializer, CommentVoteListSerializer,
+    CommentVoteCreateSerializer, CommentVoteUpdateSerializer
 )
 
 
@@ -33,7 +34,7 @@ class CommentViewSet(mixins.ListModelMixin,
             return CommentSerializer
 
     def perform_create(self, serializer):
-        comment = serializer.save()
+        comment = serializer.save(user=self.request.user)
         comment.save()
 
     def perform_update(self, serializer):
@@ -91,8 +92,15 @@ class PostVoteViewSet(mixins.ListModelMixin,
     def get_serializer_class(self):
         if self.action == 'list':
             return PostVoteListSerializer
+        if self.action == 'create':
+            return PostVoteCreateSerializer
+        if self.action == 'update':
+            return PostVoteUpdateSerializer
         else:
             return PostVoteSerializer
+
+    def perform_create(self, serializer):
+        vote_type = serializer.save(user=self.request.user)
 
 
 class CommentVoteViewSet(mixins.ListModelMixin,
@@ -107,5 +115,12 @@ class CommentVoteViewSet(mixins.ListModelMixin,
     def get_serializer_class(self):
         if self.action == 'list':
           return CommentVoteListSerializer
+        if self.action == 'create':
+          return CommentVoteCreateSerializer
+        if self.action == 'update':
+          return CommentVoteUpdateSerializer
         else:
           return CommentVoteSerializer
+
+    def perform_create(self, serializer):
+        vote_type = serializer.save(user=self.request.user)
