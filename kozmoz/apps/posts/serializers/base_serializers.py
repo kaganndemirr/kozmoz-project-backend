@@ -12,21 +12,21 @@ class PostVoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PostVote
-        fields = ('id', 'post', 'vote_type')
+        fields = ('id', 'user', 'post', 'vote_type')
 
 
 class PostVoteListSerializer(PostVoteSerializer):
 
     class Meta:
         model = PostVote
-        fields = ('id', 'post', 'vote_type')
+        fields = ('id', 'user', 'post', 'vote_type')
 
 
 class PostVoteCreateSerializer(PostVoteSerializer):
 
     class Meta:
         model = PostVote
-        fields = ('id', 'post', 'vote_type')
+        fields = ('id', 'user', 'post', 'vote_type')
 
 
 class PostVoteUpdateSerializer(PostVoteSerializer):
@@ -40,21 +40,21 @@ class CommentVoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommentVote
-        fields = ('id', 'comment', 'vote_type')
+        fields = ('id', 'user', 'comment', 'vote_type')
 
 
 class CommentVoteListSerializer(CommentVoteSerializer):
 
     class Meta:
         model = CommentVote
-        fields = ('id', 'comment', 'vote_type')
+        fields = ('id', 'user', 'comment', 'vote_type')
         
 
 class CommentVoteCreateSerializer(CommentVoteSerializer):
 
     class Meta:
         model = CommentVote
-        fields = ('id', 'comment', 'vote_type')
+        fields = ('id', 'user', 'comment', 'vote_type')
 
 
 class CommentVoteUpdateSerializer(CommentVoteSerializer):
