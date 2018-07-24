@@ -8,7 +8,7 @@ from django.urls import reverse
 from .base_tests import CommentAPITestCase, PostAPITestCase
 
 
-class CommentAPIV1TestCase(CommentAPIV1TestCase):
+class CommentAPIV1TestCase(CommentAPITestCase):
 
 	def test_list_comment(self):
 		url = reverse('v1:comments-list')
@@ -48,6 +48,58 @@ class CommentAPIV1TestCase(CommentAPIV1TestCase):
 
     def test_delete_reminder(self):
         url = reverse('v1:comments-detail', kwargs={'pk': self.comment.id})
+
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+
+class PostAPIV1TestCase(PostAPITestCase):
+
+    def test_list_post(self):
+        url = reverse('v1:posts-list')
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create_post(self):
+        url = reverse('v1:posts-list')
+
+        response = self.client.post(url, self.dummy_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(
+            response.data.get('description', None),
+            self.dummy_data.get('description', None)
+        )
+        self.assertEqual(
+            response.data.get('media', None),
+            self.dummy_data.get('media', None)
+        )
+
+    def test_retrieve_post(self):
+        url = reverse('v1:posts-detail', kwargs={'pk': self.post.id})
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('id', None), self.post.id)
+        self.assertEqual(response.data.get('description', None), self.post.description)
+        self.assertEqual(response.data.get('media', None), self.post.media)
+
+    def test_update_post(self):
+        dummy_data = {
+            'description': 'My first Updated Post',
+            'media': ''
+        }
+        url = reverse('v1:posts-detail', kwargs={'pk': self.post.id})
+
+        response = self.client.put(url, dummy_data, format='json')
+        self.task.refresh_from_db()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('id', None), self.post.id)
+        self.assertEqual(response.data.get('description', None), self.post.description)
+        self.assertEqual(response.data.get('media', None), self.post.media)
+
+    def test_delete_post(self):
+        url = reverse('v1:posts-detail', kwargs={'pk': self.post.id})
 
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
