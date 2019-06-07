@@ -1,8 +1,5 @@
 # Local Django
 from .base import *
-from .staging_production_secrets import( EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
-    DEFAULT_FROM_EMAIL
-    )
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
