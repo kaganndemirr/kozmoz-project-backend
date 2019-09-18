@@ -1,6 +1,6 @@
 # Local Django
 from .base import *
-from .local_secrets import(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
+from .local_secrets import (EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
     DEFAULT_FROM_EMAIL
     )
 

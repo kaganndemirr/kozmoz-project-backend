@@ -1,7 +1,7 @@
 # Third-Party
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, status
-from rest_framework.decorators import detail_route, list_route
+from rest_framework.decorators import action
 
 # Django
 from django.core.mail import send_mail
@@ -73,8 +73,8 @@ class UserViewSet(mixins.ListModelMixin,
 
         return user
 
-    @detail_route(methods=['post'], url_path='image/update',
-                  url_name='update-image')
+    @action(methods=['post'], url_path='image/update',
+                  url_name='update-image', detail=True)
     def update_image(self, request, pk=None):
         user = self.get_object()
         serializer_class = self.get_route_serializer_class()
@@ -88,8 +88,8 @@ class UserViewSet(mixins.ListModelMixin,
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @detail_route(methods=['delete'], url_path='image/delete',
-                  url_name='delete-image')
+    @action(methods=['delete'], url_path='image/delete',
+                  url_name='delete-image', detail=True)
     def delete_image(self, request, pk=None):
         user = self.get_object()
 
@@ -104,8 +104,8 @@ class UserViewSet(mixins.ListModelMixin,
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-    @detail_route(methods=['post'], url_path='password/change',
-                  url_name='change-password')
+    @action(methods=['post'], url_path='password/change',
+                  url_name='change-password', detail=True)
     def change_password(self, request, pk=None):
         user = self.get_object()
         serializer_class = self.get_route_serializer_class()
@@ -121,8 +121,8 @@ class UserViewSet(mixins.ListModelMixin,
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @list_route(methods=['post'], url_path='password/forgot',
-                url_name='forgot-password')
+    @action(methods=['post'], url_path='password/forgot',
+                url_name='forgot-password', detail=False)
     def forgot_password(self, request):
         serializer_class = self.get_route_serializer_class()
         serializer = serializer_class(data=request.data)
@@ -138,8 +138,8 @@ class UserViewSet(mixins.ListModelMixin,
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @list_route(methods=['post'], url_path='activation/resend',
-                url_name='resend-activation')
+    @action(methods=['post'], url_path='activation/resend',
+                url_name='resend-activation', detail=False)
     def resend_activation(self, request):
         serializer_class = self.get_route_serializer_class()
         serializer = serializer_class(data=request.data)
