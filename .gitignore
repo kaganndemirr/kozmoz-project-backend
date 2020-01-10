@@ -25,3 +25,9 @@ media/
 
 # mkdocs documentation
 docs_build/
+
+# vscode
+.vscode/
+
+# PyCharm
+.idea/

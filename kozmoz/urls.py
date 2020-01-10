@@ -16,16 +16,14 @@ Including another URLconf
 
 # Django
 from django.contrib import admin
-from django.conf import settings
 from django.urls import path, re_path
 from django.conf.urls import include
-from django.views.static import serve
 
 # Local Django
-from core.api_views import LoginView
-from kozmoz.views import(IndexView, ActivationView,
-    ResetPasswordView, DocumentationView
-    )
+from kozmoz.views import (IndexView, ActivationView, ResetPasswordView, DocumentationView)
+
+# Third Party
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     # Landing
@@ -35,15 +33,14 @@ urlpatterns = [
     re_path('^admin/', admin.site.urls),
 
     # Token
-    re_path('^auth/login', LoginView.as_view(), name='login'),
-    re_path('^auth/', include('djoser.urls.authtoken')),
+    re_path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 
     # Api
     re_path('^', include('kozmoz.api_urls')),
 
     # Activation and Password Operations
-    re_path('^activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
-    re_path('^reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password'),
+    re_path(r'^activation/(?P<key>\w+)/$', ActivationView.as_view(), name='activation'),
+    re_path(r'^reset-password/(?P<key>\w+)/$', ResetPasswordView.as_view(), name='reset-password'),
 
     # Documentation
     re_path('^docs/$', DocumentationView.as_view(), name='docs'),

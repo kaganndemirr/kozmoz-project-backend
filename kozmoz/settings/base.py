@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # External Applications
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
     'easy_thumbnails',
 
     # Internal Applications
@@ -93,7 +92,7 @@ AUTH_USER_MODEL = 'users.User'
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Europe/Istanbul'
 

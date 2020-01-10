@@ -9,7 +9,7 @@ pillow
 djangorestframework
 
 # Djoser
-djoser==0.6.0
+djoser
 
 # Celery
 celery
